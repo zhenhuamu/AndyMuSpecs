@@ -15,19 +15,24 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
+  #框架的名字,也是pod search "框架名"
   s.name         = "MZHBaiduMobStat"
-  s.version      = "0.0.1"
-  s.summary      = "MZH‘s BaiduMobStat."
+  #框架版本号
+  s.version      = "0.0.4"
+  #框架简介
+  s.summary      = "A Test For MZHBaiduMobStat"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = <<-DESC
-                   DESC
 
+  #框架的描述
+  s.description  = "The experiment added pod support for MZHBaiduMobStat"
+  #框架的主页
   s.homepage     = "https://github.com/zhenhuamu/BaiduMobStat/tree/master"
+
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -39,7 +44,9 @@ Pod::Spec.new do |s|
   #
 
   #s.license      = "MIT (example)"
-  s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+
+  #框架遵守的开源协议
+  s.license      = { :type => "MIT", :file => "BaiduMobStat/LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -52,7 +59,9 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "andyMu" => "muzhenhua0601@163.com" }
+  #框架的作者
+  s.author             = { "AndyMu" => "muzhenhua0601@163.com" }
+
   # Or just: s.author    = "muzhenhua"
   # s.authors            = { "muzhenhua" => "muzh@2345.com" }
   # s.social_media_url   = "http://twitter.com/muzhenhua"
@@ -64,7 +73,9 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-  s.platform     = :ios, "5.0"
+
+  #框架支持的平台和最低系统版本
+  s.platform     = :ios, "7.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -79,7 +90,8 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/zhenhuamu/BaiduMobStat.git", :tag => "0.0.1" }
+  #框架的资源路径:路径可以指向远端代码库，也可以指向本地项目
+  s.source       = { :git => "https://github.com/zhenhuamu/BaiduMobStat.git", :tag => "0.0.4" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -90,19 +102,27 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "BaiduMobStat", "BaiduMobStat/**/*.{h,m}"
+  #框架被导时，会导入BaiduMobStat文件夹下所有的.h和.m文件
+  s.source_files  =  "BaiduMobStat/*.{h,m}"
+  #框架公开的头文件
+  s.public_header_files = "BaiduMobStat/*.h"
+
   #s.exclude_files = "Classes/Exclude"
 
-  # s.public_header_files = "Classes/**/*.h"
 
 
-  # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  # ――― Resources ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――= "MZHBaiduMobStat"――――― #
   #
   #  A list of resources included with the Pod. These are copied into the
   #  target bundle with a build phase script. Anything else will be cleaned.
   #  You can preserve files from being cleaned, please don't preserve
   #  non-essential files like tests, examples and documentation.
   #
+
+  #框架被其他工程引入时，会导入Assets目录下的资源文件
+  s.resource_bundles = {
+  "MZHBaiduMobStat" => "BaiduMobStat/Assets/*.{mp3,png}"
+  }
 
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"
@@ -117,11 +137,17 @@ Pod::Spec.new do |s|
   #
 
   # s.framework  = "SomeFramework"
-  # s.frameworks = "SomeFramework", "AnotherFramework"
-
   # s.library   = "iconv"
-  # s.libraries = "iconv", "xml2"
 
+  #框架库依赖的framework
+  s.frameworks = "JavaScriptCore", "Security","CoreLocation","SystemConfiguration", "CoreTelephony","CoreGraphics","UIKit","Foundation"
+  #框架库依赖的动态库
+  s.libraries = "z", "stdc++"
+  #引用自己生成的.a文件
+  s.vendored_libraries = "BaiduMobStat/*.a"
+
+  #引用自己生成的framework
+  #s.vendored_frameworks = "BaiduMobStat/**/*.framework"
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -129,9 +155,17 @@ Pod::Spec.new do |s|
   #  where they will only apply to your library. If you depend on other Podspecs
   #  you can include multiple dependencies to ensure it works.
 
-  # s.requires_arc = true
+  #框架是否需要支持ARC
+  s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # s.dependency "JSONKit", "~> 1.4"
+
+  #框架依赖的其他第三方库
+  #s.dependency "JSONKit", "~> 1.4"
+
+  #针对特定文件，使用subspec添加特定的配置，如部分文件不使用arc，可如下配置
+  #s.subspec 'no-arc' do |sp|
+  #sp.source_files = 'iOS_LoanSDK/Classes/Libs/OpenUDID/OpenUDID.m'
+  #sp.requires_arc  = false
 
 end
